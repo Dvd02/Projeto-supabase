@@ -16,8 +16,8 @@ import { useRouter } from "next/navigation"
 import supabaseClient from "@/service/supabaseClient"
 
 export default function Home() {
-  const [email, setEmail] = useState('david2@gmail.com')
-  const [password, setPassword] = useState('12345678')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [message, setMessage] = useState(null)
   const router = useRouter()
   
@@ -40,7 +40,7 @@ export default function Home() {
     })
 
     if (error) {
-      setMessage(error.message)
+      setMessage({text:error.message, color:"red"})
     } else {
       router.push('/site')
     }
@@ -53,15 +53,15 @@ export default function Home() {
     })
 
     if (error) {
-      setMessage("Error signing up")
+      setMessage({text:"Error signing up", color:"red"})
     } else {
-      setMessage("Sign up successful")
+      setMessage({text:"Sign up successful", color:"green"})
       // signIn({preventDefault:()=>{}})
     }
   }
 
   return (
-    <div class="h-screen flex flex-col justify-center">
+    <div className="h-screen flex flex-col justify-center">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Sign in</CardTitle>
@@ -96,14 +96,16 @@ export default function Home() {
                 />
               </div>
               <Button type="submit" className="w-full">
-                sign up
+                sign in
               </Button>
             </div>
           </form>
 
-          <div className="mt-4 text-center text-sm text-red-500">
-            {message && <p>{message}</p>}
-          </div>
+          {message && 
+            <div className={`mt-4 text-center text-sm text-${message.color}-500`}>
+              {message.text}
+            </div>
+          }
 
           <div className="mt-4 text-center text-sm">
             Don&apost have an account?{" "}
