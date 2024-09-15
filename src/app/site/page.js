@@ -1,17 +1,45 @@
 
-import { redirect } from 'next/navigation'
-import { createClienteServer } from '@/utils/supabase/server'
-import ClientSideComponent from './ClientSideComponent'
+'use client'
 
-export default async function SitePage() {
-  const supabase = createClienteServer()
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { createClient } from '@/utils/supabase/client'
+import { Button } from '@/components/ui/button'
 
-  const { data, error } = await supabase.auth.getUser()
-  if (error || !data?.user) {
-    redirect('/')
+export default function SitePage() {
+  const supabase = createClient()
+  const router = useRouter()
+  const [user, setUser] = useState(null)
+
+  async function signOut() {
+    await supabase.auth.signOut()
+    router.push('/')
+  }
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        setUser(session.user)
+      } 
+    }
+    getUser()
+  }, [])
+
+  if (!user) {
+    return (
+      <div className="h-screen flex flex-col justify-center items-center">
+        <h1>Carregando...</h1>
+      </div>
+    )
   }
 
   return (
-    <ClientSideComponent user={data.user} />
+    <div className="h-screen flex flex-col justify-center items-center">
+      <h1>Bem-vindo, {user.email}</h1>
+      <Button onClick={signOut}>
+        Logout
+      </Button>
+    </div>
   )
 }
