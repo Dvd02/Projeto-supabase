@@ -35,6 +35,8 @@ export default function Home() {
   
   async function signIn(e) {
     e.preventDefault()
+    setMessage({text:"logando...", color:"blue"})
+
     const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
@@ -48,6 +50,8 @@ export default function Home() {
   }
 
   async function signUp() {
+    setMessage({text:"cadastrando...", color:"blue"})
+
     const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
@@ -103,7 +107,7 @@ export default function Home() {
           </form>
 
           {message && 
-            <div className={`mt-4 text-center text-sm text-${message.color}-500`}>
+            <div className="mt-4 text-center text-sm" style={{ color: message.color }}>
               {message.text}
             </div>
           }
