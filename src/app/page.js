@@ -13,17 +13,18 @@ import { Label } from "@/components/ui/label"
 
 import { useEffect, useState } from 'react'
 import { useRouter } from "next/navigation"
-import supabaseClient from "@/service/supabaseClient"
+import { createClient } from "@/utils/supabase/client"
 
 export default function Home() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState(null)
   const router = useRouter()
+  const supabase = createClient()
   
   useEffect(() => {
     const getUser = async () => {
-      const { data: { session } } = await supabaseClient.auth.getSession()
+      const { data: { session } } = await supabase.auth.getSession()
 
       if (session) {
         router.push('/site')
@@ -34,7 +35,7 @@ export default function Home() {
   
   async function signIn(e) {
     e.preventDefault()
-    const { user, error } = await supabaseClient.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     })
@@ -47,7 +48,7 @@ export default function Home() {
   }
 
   async function signUp() {
-    const { error } = await supabaseClient.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     })
