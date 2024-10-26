@@ -1,0 +1,17 @@
+Versão 1:
++ Criar a tela inicial para login e cadastrado
++ Criar uma Pagina quando logado
++ Integrar o sistema de login e cadastro com o supabase
++ Fazer rotas seguras com Middlewares
+
+Versão 2:
++ Criar uma tabela de prestador no supa base com os seguintes dados: nome, telefone, cidade, sexo e uma lista com os serviços que ele presta (esse dado vai ser guardado num array json na 
+tabela prestadores do banco de dados)
++ Criar uma tela com uma seção (hero section) com o texto: "Gostou de um serviço? Indique o(a) prestador(a)". Nessa página, coloque o texto abaixo de uma imagem e um botão no 
+rodapé "Vamos lá". O layout pode ser parecido com a primeira imagem
++ Criar uma tela para que a pessoa possa indicar o prestador de serviço via o numero de telefone dele(a). Nessa tela o usuário vai colocar o telefone do prestador de serviço, 
+coloque novamente o botão no rodapé "Continuar"
+- Ao continuar, o sistema busca no banco de dados para verificar se o prestador existe no banco de dados do supabase e passa pra uma nova tela em que mostra os dados desse prestador 
+(caso exista), como na imagem 2
+- Caso o prestador não exista ainda cadastrado, o usuário deve ser levado pra uma tela de cadastrado de pretador, em que ele preenche o nome, telefone (aproveita o telefone já digitado 
+na tela anterior) e seleciona o serviço prestado em um campo (select) que tenha uma lista de serviços (exemplo: pedreiro, pintor, marceneiro, manicure, ...)
