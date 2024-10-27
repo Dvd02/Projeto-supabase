@@ -39,8 +39,6 @@ export default function Site() {
     return (<>
         <div className="h-screen flex flex-col">
             <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
-                <div/>
-                
                 <div className="text-lg">
                     {user.email}
                 </div>
