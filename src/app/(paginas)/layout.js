@@ -11,8 +11,10 @@ export default function PaginasLayout({ children }) {
     const supabase = createClient()
     const router = useRouter()
     const [user, setUser] = useState(null)
+    const [deslogando, setDeslogando] = useState("Deslogar")
 
     async function deslogar() {
+        setDeslogando("Deslogando...")
         await supabase.auth.signOut()
         router.push('/')
     }
@@ -43,19 +45,19 @@ export default function PaginasLayout({ children }) {
 
     return (<>
         <div className="h-screen flex flex-col">
-            <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
+            <header className="relative flex justify-between items-center p-4 bg-gray-800 text-white">
                 {pathname != "/site" &&
                     <Button onClick={inicio}>
                         Inicio
                     </Button>
                 }
 
-                <div className="text-lg">
+                <div className="absolute top-6 left-1/2 transform -translate-x-1/2 text-lg">
                     {user.email}
                 </div>
 
                 <Button onClick={deslogar}>
-                    Deslogar
+                    {deslogando}
                 </Button>
             </header>
 
