@@ -19,8 +19,7 @@ export default function Indicar() {
     const supabase = createClient()
     const router = useRouter()
     const [user, setUser] = useState(null)
-    const [numerosTelefone, setNumerosTelefone] = useState('')
-    const [telefone, setTelefone] = useState('(XX) XXXXX-XXXX')
+    const [telefone, setTelefone] = useState('(XX) XXXXX-XXXX ')
 
     async function signOut() {
         await supabase.auth.signOut()
@@ -51,22 +50,15 @@ export default function Indicar() {
     }
 
     function digitaTelefone (e){
-        let novoNumero = numerosTelefone
+        let novoNumero = e.target.value.replace(/\D/g, '')
 
-        if (e.target.value.length == 14){
+        console.log("tamanho do numero de telefone: "+novoNumero.length + " ["+ novoNumero +"]")
+
+        if (e.target.value.length == 15){        
             novoNumero = novoNumero.slice(0, -1)
-            setNumerosTelefone(novoNumero)
-
-        } else {
-            const ultimaTeclaDigitada = e.target.value[15]
-            const ultimoNumeroDigitado = ultimaTeclaDigitada.replace(/\D/g, '')
-            if (novoNumero.length < 11 && ultimoNumeroDigitado != ''){
-                novoNumero += ultimoNumeroDigitado
-                setNumerosTelefone(novoNumero)
-            }
         }
 
-        let formatacaoTelefone = '(XX) XXXXX-XXXX'
+        let formatacaoTelefone = '(XX) XXXXX-XXXX '
         for (let i = 0; i < 11; i++) {
             if (novoNumero[i]){
                 formatacaoTelefone = formatacaoTelefone.replace("X",novoNumero[i])
@@ -109,7 +101,6 @@ export default function Indicar() {
                                         type="text"
                                         id="telefone"
                                         name="telefone"
-                                        placeholder="(!!) !!!!!-!!!!"
                                         value={telefone}
                                         onChange={digitaTelefone}
                                         required
