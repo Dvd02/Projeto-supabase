@@ -17,7 +17,7 @@ import InputNumero, { getTelefone } from "@/components/ui/InputNumero"
 
 export default function Indicar() {
     const router = useRouter()
-    const [telefone, setTelefone] = useState(localStorage.getItem('telefone')+" " || '(XX) XXXXX-XXXX ')
+    const [telefone, setTelefone] = useState(localStorage.getItem('telefone') ? localStorage.getItem('telefone')+" " : '(XX) XXXXX-XXXX ')
 
     function proximo(e) {
         e.preventDefault()

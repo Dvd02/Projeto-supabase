@@ -15,13 +15,13 @@ import { useRouter } from 'next/navigation'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
-import InputNumero from "@/components/ui/InputNumero";
+import InputNumero, { getTelefone } from "@/components/ui/InputNumero";
 
 export default function CadastarIndicado() {
     const supabase = createClient()
     const router = useRouter()
 
-    const [telefone, setTelefone] = useState(localStorage.getItem('telefone')+" " || '(XX) XXXXX-XXXX ')
+    const [telefone, setTelefone] = useState(localStorage.getItem('telefone') ? localStorage.getItem('telefone')+" " : '(XX) XXXXX-XXXX ')
     const [nome, setNome] = useState('')
     const [sexo, setSexo] = useState('Indefinido')
     const [cidade, setCidade] = useState('')
@@ -45,7 +45,7 @@ export default function CadastarIndicado() {
             return;
         }
 
-        localStorage.setItem('telefone', getTelefone());
+        localStorage.setItem('telefone', getTelefone(telefone));
         setMensagem({ texto: "Novo usuário cadastrado.", cor: "green" });    
     }
     
