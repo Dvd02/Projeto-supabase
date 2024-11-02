@@ -68,7 +68,7 @@ export default function Home() {
 
     return (
         <div className="h-screen flex flex-col justify-center">
-            <Card className="mx-auto max-w-sm">
+            <Card className="mx-auto max-w-sm w-[100%]">
                 <CardHeader>
                     <CardTitle className="text-2xl">Login</CardTitle>
                     <CardDescription>
@@ -90,10 +90,9 @@ export default function Home() {
                                     required
                                 />
                             </div>
+
                             <div className="grid gap-2">
-                                <div className="flex items-center">
-                                    <Label htmlFor="password">Senha</Label>
-                                </div>
+                                <Label htmlFor="password">Senha</Label>
                                 <Input
                                     id="password"
                                     type="password"
@@ -102,6 +101,7 @@ export default function Home() {
                                     required
                                 />
                             </div>
+
                             <Button type="submit" className="w-full">
                                 Logar
                             </Button>

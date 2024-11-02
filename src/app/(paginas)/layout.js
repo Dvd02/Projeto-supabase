@@ -16,10 +16,10 @@ export default function PaginasLayout({ children }) {
     async function deslogar() {
         setDeslogando("Deslogando...")
         await supabase.auth.signOut()
-        router.push('/')
+        router.replace('/')
     }
 
-    function inicio(){
+    function irParaOInicio(){
         router.push('/site')
     }
 
@@ -45,9 +45,9 @@ export default function PaginasLayout({ children }) {
 
     return (<>
         <div className="h-screen flex flex-col">
-            <header className="relative flex justify-between items-center p-4 bg-gray-800 text-white">
+            <header className="relative flex p-4 bg-gray-800 text-white">
                 {pathname != "/site" &&
-                    <Button onClick={inicio}>
+                    <Button onClick={irParaOInicio}>
                         Inicio
                     </Button>
                 }
@@ -56,7 +56,7 @@ export default function PaginasLayout({ children }) {
                     {user.email}
                 </div>
 
-                <Button onClick={deslogar}>
+                <Button className="ml-auto" onClick={deslogar}>
                     {deslogando}
                 </Button>
             </header>
