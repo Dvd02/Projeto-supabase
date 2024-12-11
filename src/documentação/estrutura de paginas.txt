@@ -1,0 +1,12 @@
+
+app/
+├── (pages)/                               # Agrupamento das páginas privadas
+│   ├── layout.js                          # Layout principal das páginas. Inclui carregamento de informações do usuário logado, cabeçalho exibindo o e-mail do usuário e opção de deslogar.
+│   ├── site/page.js                       # Página inicial exibida após o login do usuário.
+│   └── (service-provider)/                # Agrupamento das páginas relacionadas aos serviços indicados.
+│       ├── cadastar-indicado/page.js      # Página para cadastrar um serviço prestado.
+│       ├── inadicado/page.js              # Página que busca informações sobre o prestador de serviço pelo número.
+│       └── inadicar/page.js               # Página com formulário para inserir os dados sobre o prestador de serviço.
+├── globals.css                            # Arquivo de estilização global que define o tema do site.
+├── layout.js                              # Layout base de todo o site
+└── page.js                                # Página inicial do site, onde os usuários realizam login.

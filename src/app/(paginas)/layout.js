@@ -24,13 +24,15 @@ export default function PaginasLayout({ children }) {
     }
 
     useEffect(() => {
-        const getUser = async () => {
-        const { data: { session } } = await supabase.auth.getSession()
-            if (session) {
-                setUser(session.user)
-            } 
-        }
-        getUser()
+        supabase.auth.getSession()
+            .then(({ data: { session } }) => {
+                if (session) {
+                    setUser(session.user)
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao obter sessão:', error);
+            });
     }, [])
 
     if (!user) {
