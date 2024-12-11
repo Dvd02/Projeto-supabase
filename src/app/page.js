@@ -22,17 +22,20 @@ export default function Home() {
     const router = useRouter()
     const supabase = createClient()
 
+    // verifica se o usuario ja esta logado e então redireciona ele para a pagina de logado
     useEffect(() => {
-        const getUser = async () => {
-            const { data: { session } } = await supabase.auth.getSession()
-
-            if (session) {
-                router.push('/site')
-            }
-        }
-        getUser()
+        supabase.auth.getSession()
+            .then(({ data: { session } }) => {
+                if (session) {
+                    router.push('/site');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao obter sessão:', error);
+            });
     }, [])
 
+    // função para logar
     async function signIn(e) {
         e.preventDefault()
         setMessage({ text: "Fazendo o login...", color: "gray" })
@@ -43,13 +46,13 @@ export default function Home() {
         })
 
         if (error) {
-            // Invalid login credentials
             setMessage({ text: "Error ao logar, dados invalidos", color: "red" })
         } else {
             router.push('/site')
         }
     }
 
+    // função para cadastrar
     async function signUp() {
         setMessage({ text: "Fazendo o cadastro...", color: "gray" })
 
@@ -62,7 +65,6 @@ export default function Home() {
             setMessage({ text: "Erro ao cadastrar, email já cadastrado.", color: "red" })
         } else {
             setMessage({ text: "Cadastrado com sucesso.", color: "green" })
-            // signIn({preventDefault:()=>{}})
         }
     }
 
