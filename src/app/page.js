@@ -52,7 +52,7 @@ export default function Home() {
         }
     }
 
-    // função para cadastrar
+    // função para se cadastrar
     async function signUp() {
         setMessage({ text: "Fazendo o cadastro...", color: "gray" })
 
