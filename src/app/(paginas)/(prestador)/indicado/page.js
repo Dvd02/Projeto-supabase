@@ -10,7 +10,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Text } from "@/components/ui/text";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import { Label } from "@/components/ui/label";
@@ -19,19 +19,29 @@ export default function Indicado() {
     const supabase = createClient()
     const router = useRouter()
     const telefone = localStorage.getItem('telefone');
-    const [dados, setDados] = useState({usuarioEncontrado: false})
+    const [dados, setDados] = useState(null)
+    const [estaCarregando, setEstaCarregando] = useState(true)
 
-    const getDados = async () => {
-        const { data, error } = await supabase.from('prestadores').select('*').eq('telefone', telefone);
-        
-        if (error) {
-            return ;
-        }
+    useEffect(()=>{
+        supabase.from('prestadores').select('*').eq('telefone', telefone)
+            .then(({ data, error })=>{
+                setEstaCarregando(false)
 
-        setDados(data[0])
+                if (error) {
+                    return ;
+                }
+                
+                setDados(data[0])
+            });
+    },[])
+
+    if (estaCarregando){
+        return (
+            <div className="h-screen flex flex-col justify-center items-center">
+                <h1>Carregando pesquisa de prestador...</h1>
+            </div>
+        )
     }
-    getDados()
-
 
     return (<>
         <div className="flex-1 flex flex-col justify-center items-center">
@@ -41,7 +51,7 @@ export default function Indicado() {
                         {dados ?
                             dados.nome
                         :
-                            "Usuario não encontrado."
+                            "Prestador não encontrado."
                         }
                     </CardTitle>
                 </CardHeader>
