@@ -13,5 +13,5 @@ rodapé "Vamos lá". O layout pode ser parecido com a primeira imagem
 coloque novamente o botão no rodapé "Continuar"
 + Ao continuar, o sistema busca no banco de dados para verificar se o prestador existe no banco de dados do supabase e passa pra uma nova tela em que mostra os dados desse prestador 
 (caso exista)
-+ Caso o prestador não exista ainda cadastrado, o usuário deve ser levado pra uma tela de cadastrado de pretador, em que ele preenche o nome, telefone (aproveita o telefone já digitado 
+- Caso o prestador não exista ainda cadastrado, o usuário deve ser levado pra uma tela de cadastrado de pretador, em que ele preenche o nome, telefone (aproveita o telefone já digitado 
 na tela anterior) e seleciona o serviço prestado em um campo (select) que tenha uma lista de serviços (exemplo: pedreiro, pintor, marceneiro, manicure, ...)
