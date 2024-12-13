@@ -28,6 +28,10 @@ export default function Site() {
                 <button onClick={indicar} className="bg-white text-black py-2 px-5 rounded-full hover:bg-gray-800 text-lg md:text-xl">
                     Vamos lá
                 </button>
+
+                <button onClick={()=>{router.push("pesquisar-prestadores")}} className="mt-5 bg-white text-black py-2 px-5 rounded-full hover:bg-gray-800 text-lg md:text-xl">
+                    pesquisar por prestadores de serviço
+                </button>
             </div>
         </div>
     </>)

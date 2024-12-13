@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label"
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import InputNumero, { getTelefone } from "@/components/ui/InputNumero"
+import InputNumero, { getTelefone } from "@/components/desenvolvidos/InputNumero"
 
 export default function Indicar() {
     const router = useRouter()
