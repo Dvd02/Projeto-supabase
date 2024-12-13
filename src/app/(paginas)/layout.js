@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { usePathname } from 'next/navigation';
 
 export default function PaginasLayout({ children }) {
+    const pathname = usePathname(); 
     const supabase = createClient()
     const router = useRouter()
     const [user, setUser] = useState(null)
@@ -31,9 +32,9 @@ export default function PaginasLayout({ children }) {
                 }
             })
             .catch(error => {
-                console.error('Erro ao obter sessão:', error);
+                console.log('Erro ao obter sessão:', error);
             });
-    }, [])
+    }, [pathname])
 
     if (!user) {
         return (
@@ -42,8 +43,6 @@ export default function PaginasLayout({ children }) {
             </div>
         )
     }
-
-    const pathname = usePathname(); 
 
     return (<>
         <div className="h-screen flex flex-col">
