@@ -5,5 +5,5 @@ CREATE TABLE prestadores (
     telefone TEXT NOT NULL UNIQUE,
     cidade TEXT NOT NULL,
     sexo TEXT,
-    servicos JSONB
+    servicos TEXT[]
 );
